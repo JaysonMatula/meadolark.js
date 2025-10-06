@@ -36,7 +36,10 @@ app.get('/', (req, res) => res.render('home')){
   res.send('Meadowlark Travel');
 })
 
-app.get('/about', (req, res) => res.render('about')){
+app.get('/about', (req, res) => {
+  const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
+  res.render('about', { fortune: randomFortune })
+})
   res.type('text/plain')
   res.send('About Meadowlark Travel')
 })
