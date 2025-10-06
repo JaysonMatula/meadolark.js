@@ -29,12 +29,12 @@ app.use((err, req, res, next) => {
 app.listen(port, () => console.log(
   `Express started on http://localhost:${port}; ` +
   `press Ctrl-C to terminate.`))
-app.get('/', (req, res) => {
+app.get('/', (req, res) => res.render('home')){
   res.type('text/plain')
   res.send('Meadowlark Travel');
 })
 
-app.get('/about', (req, res) => {
+app.get('/about', (req, res) => res.render('about')){
   res.type('text/plain')
   res.send('About Meadowlark Travel')
 })
@@ -43,5 +43,12 @@ app.get('/about', (req, res) => {
 app.use((req, res) => {
   res.type('text/plain')
   res.status(404)
-  res.send('404 - Not Found')
+ res.render('404')
+})
+
+// custom 500 page
+app.use((err, req, res, next) => {
+  console.error(err.message)
+  res.status(500)
+  res.render('500')
 })
